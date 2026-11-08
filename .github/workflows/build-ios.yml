@@ -1,0 +1,48 @@
+name: Build iOS IPA
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Prebuild iOS
+        run: npx expo prebuild --platform ios
+
+      - name: Build Unsigned Archive
+        run: |
+          cd ios
+          xcodebuild -workspace *.xcworkspace \
+            -scheme $(ls -d *.xcodeproj | sed 's/\.xcodeproj//') \
+            -configuration Release \
+            -sdk iphoneos \
+            -archivePath $PWD/build/App.xcarchive \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            archive
+
+      - name: Create IPA
+        run: |
+          mkdir -p Payload
+          cp -r ios/build/App.xcarchive/Products/Applications/*.app Payload/
+          zip -r HerSeySensin.ipa Payload
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HerSeySensin-IPA
+          path: HerSeySensin.ipa

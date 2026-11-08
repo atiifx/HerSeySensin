@@ -1,24 +1,81 @@
 {
   "expo": {
-    "name": "HerSeySensin",
-    "slug": "HerSeySensin",
+    "name": "Her Şey Sensin",
+    "slug": "her-sey-sensin",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "ios": {
-      "supportsTablet": true
+    "userInterfaceStyle": "dark",
+    "runtimeVersion": {
+      "policy": "appVersion"
     },
-    "android": {
-      "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+    "updates": {
+      "url": "https://u.expo.dev/89eb85f3-c3b2-4b12-a36b-a4794ab74cba"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#08080B"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Radar modunda sevgilinle birbirinizi anlık görebilmeniz için konum gereklidir.",
+          "isAndroidBackgroundLocationEnabled": true,
+          "isAndroidForegroundServiceEnabled": true
+        }
+      ]
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.atakan.herseysensin",
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch",
+          "location",
+          "fetch"
+        ],
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Radar modunda sevgilinle birbirinizi anlık görebilmeniz için konum gereklidir.",
+        "NSLocationWhenInUseUsageDescription": "Harita kullanımı için konum izni gereklidir.",
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "android": {
+      "package": "com.atakan.herseysensin",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBj0A17P87LE362SuV-Ii9z0ovFZxWQ4JY"
+        }
+      },
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#08080B"
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION",
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_BACKGROUND_LOCATION",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_LOCATION",
+        "android.permission.POST_NOTIFICATIONS"
+      ]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "89eb85f3-c3b2-4b12-a36b-a4794ab74cba"
+      }
     }
   }
 }
